@@ -1,13 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      CdLend
+      {{ cd.title }}
     </ion-title>
     <ion-button (click)="closeModal()" slot="end">
       <ion-icon name="close"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
+
 <ion-content padding>
-  <p>{{ value }}</p>
+  <ion-button (click)="responseModal(true)" [disabled]="cd.lended">
+    <ion-icon name="cloud-upload"></ion-icon>
+    Preter
+  </ion-button>
+  <ion-button (click)="responseModal(false)" [disabled]="!cd.lended">
+    <ion-icon name="cloud-download"></ion-icon>
+    Retourner
+  </ion-button>
+
 </ion-content>

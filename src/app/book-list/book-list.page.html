@@ -4,13 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      bookList
+      Liste des livres
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="presentModal()">
-    <ion-icon name="power"></ion-icon>
-  </ion-button>
+  <ion-list *ngFor="let book of books">
+    <ion-item (click)="presentModal(book)" [color]="book.lended == true ? 'warning' : ''">
+      <ion-label>
+        <h2>{{ book.title }}</h2>
+        <p>
+          {{ book.content }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

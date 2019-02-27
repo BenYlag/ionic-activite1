@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController, NavParams} from '@ionic/angular';
+import {Cd} from '../../models/cd.model';
 
 @Component({
   selector: 'app-lend-cd',
@@ -8,7 +9,7 @@ import {ModalController, NavParams} from '@ionic/angular';
 })
 export class LendCdComponent implements OnInit {
 
-  @Input() value: number;
+  @Input() cd: Cd;
 
   constructor(private navParams: NavParams, private modalController: ModalController) { }
 
@@ -16,7 +17,13 @@ export class LendCdComponent implements OnInit {
 
   async closeModal() {
     await this.modalController.dismiss({
-      'result': this.value
+      'result': ''
+    });
+  }
+
+  async responseModal(action: boolean) {
+    await this.modalController.dismiss({
+      'result': action
     });
   }
 

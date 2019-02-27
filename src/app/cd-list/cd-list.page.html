@@ -4,12 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      CdList
+      Liste des CD
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content padding>
-  <ion-button (click)="presentModal()">
-    <ion-icon name="power"></ion-icon>
-  </ion-button>
+  <ion-list *ngFor="let cd of cds">
+    <ion-item (click)="presentModal(cd)" [color]="cd.lended == true ? 'warning' : ''">
+      <ion-label>
+        <h2>{{ cd.title }}</h2>
+        <p>
+          {{ cd.content }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

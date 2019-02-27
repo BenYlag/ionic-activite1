@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {LendCdComponent} from './lend-cd/lend-cd.component';
+import {Cd} from '../models/cd.model';
+import {Subscription} from 'rxjs';
+import {DonneesService} from '../services/donnees.service';
 
 @Component({
   selector: 'app-cd-list',
@@ -9,20 +12,33 @@ import {LendCdComponent} from './lend-cd/lend-cd.component';
 })
 export class CdListPage implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+  cds: Cd[];
+  cdsSubscription: Subscription;
+
+  constructor(public modalController: ModalController, private donneesService: DonneesService) { }
 
   ngOnInit() {
+    this.cdsSubscription = this.donneesService.cdSubject.subscribe(
+        (cds: Cd[]) => {
+          this.cds = cds;
+        }
+    );
+    this.donneesService.emitCdSubject();
   }
 
-  async presentModal() {
+  ngOnDestroy() {
+    this.cdsSubscription.unsubscribe();
+  }
+
+  async presentModal(cd) {
     const modal = await this.modalController.create({
       component: LendCdComponent,
-      componentProps: { value: 123 }
+      componentProps: { cd: cd }
     });
 
     modal.onDidDismiss().then((detail) => {
-      if (detail !== null) {
-        console.log('The result:', detail.data);
+      if (detail.data.result !== '') {
+        this.donneesService.lendOne(cd, detail.data.result);
       }
     });
 
