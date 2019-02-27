@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CdListPage } from './cd-list.page';
+import {LendCdComponent} from './lend-cd/lend-cd.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CdListPage]
+  declarations: [CdListPage,
+    LendCdComponent
+  ],
+  entryComponents: [LendCdComponent],
 })
 export class CdListPageModule {}

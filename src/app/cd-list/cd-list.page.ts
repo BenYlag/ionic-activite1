@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController} from '@ionic/angular';
+import {LendCdComponent} from './lend-cd/lend-cd.component';
 
 @Component({
   selector: 'app-cd-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CdListPage implements OnInit {
 
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: LendCdComponent,
+      componentProps: { value: 123 }
+    });
+
+    modal.onDidDismiss().then((detail) => {
+      if (detail !== null) {
+        console.log('The result:', detail.data);
+      }
+    });
+
+    return await modal.present();
   }
 
 }
