@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController, NavParams} from '@ionic/angular';
 import {Book} from '../../models/book.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-lend-book',
@@ -15,17 +16,22 @@ export class LendBookComponent implements OnInit {
 
   ngOnInit() {}
 
+  async onSubmitForm(form: NgForm) {
+    await this.modalController.dismiss({
+      'lendedTo': form.value.lendedTo
+    });
+  }
+
+  async retourner() {
+    await this.modalController.dismiss({
+      'lendedTo': ''
+    });
+  }
 
   async closeModal() {
-    await this.modalController.dismiss({
-      'result': ''
-    });
+    await this.modalController.dismiss();
   }
 
-  async responseModal(action: boolean) {
-    await this.modalController.dismiss({
-      'result': action
-    });
-  }
+
 
 }

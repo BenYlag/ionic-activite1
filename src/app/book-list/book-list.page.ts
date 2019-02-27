@@ -37,11 +37,10 @@ export class BookListPage implements OnInit {
     });
 
     modal.onDidDismiss().then((detail) => {
-      if (detail.data.result !== '') {
-        this.donneesService.lendOne(book, detail.data.result);
+      if (typeof detail.data !== 'undefined') {
+        this.donneesService.lendOne(book, detail.data.lendedTo);
       }
     });
-
 
     return await modal.present();
   }

@@ -14,6 +14,7 @@
     <ion-item (click)="presentModal(cd)" [color]="cd.lended == true ? 'warning' : ''">
       <ion-label>
         <h2>{{ cd.title }}</h2>
+        <h3>{{ cd.lended == true ? cd.lendedTo : ''}}</h3>
         <p>
           {{ cd.content }}
         </p>
