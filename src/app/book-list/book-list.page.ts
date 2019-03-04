@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {LendBookComponent} from './lend-book/lend-book.component';
 import {Book} from '../models/book.model';
@@ -10,12 +10,13 @@ import {DonneesService} from '../services/donnees.service';
   templateUrl: './book-list.page.html',
   styleUrls: ['./book-list.page.scss'],
 })
-export class BookListPage implements OnInit {
+export class BookListPage implements OnInit, OnDestroy {
 
   books: Book[];
   booksSubscription: Subscription;
 
-  constructor(public modalController: ModalController, private donneesService: DonneesService) { }
+  constructor(public modalController: ModalController,
+              private donneesService: DonneesService) { }
 
   ngOnInit() {
     this.booksSubscription = this.donneesService.bookSubject.subscribe(
@@ -23,6 +24,7 @@ export class BookListPage implements OnInit {
           this.books = books;
         }
     );
+    this.donneesService.retreiveLocalData();
     this.donneesService.emitBookSubject();
   }
 
@@ -44,6 +46,8 @@ export class BookListPage implements OnInit {
 
     return await modal.present();
   }
+
+
 
 
 }

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="mode === 'new'">Nouvel utilisateur</ion-title>
+    <ion-title *ngIf="mode === 'connect'">Connexion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="authForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Adresse mail</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="onSubmitForm()">Soumettre</ion-button>
+    <ion-text color="danger">{{ errorMessage }}</ion-text>
+  </form>
+</ion-content>
