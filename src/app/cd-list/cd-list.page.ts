@@ -37,8 +37,8 @@ export class CdListPage implements OnInit {
     });
 
     modal.onDidDismiss().then((detail) => {
-      if (detail.data.result !== '') {
-        this.donneesService.lendOne(cd, detail.data.result);
+      if (typeof detail.data !== 'undefined') {
+        this.donneesService.lendOne(cd, detail.data.lendedTo);
       }
     });
 

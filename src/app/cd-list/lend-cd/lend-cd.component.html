@@ -10,13 +10,21 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="responseModal(true)" [disabled]="cd.lended">
-    <ion-icon name="cloud-upload"></ion-icon>
-    Preter
-  </ion-button>
-  <ion-button (click)="responseModal(false)" [disabled]="!cd.lended">
-    <ion-icon name="cloud-download"></ion-icon>
-    Retourner
-  </ion-button>
+  <form #f="ngForm" (ngSubmit)="onSubmitForm(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label>Emprunteur</ion-label>
+        <ion-input name="lendedTo"  clearInput placeholder="Nom de l'emprunteur" [(ngModel)]="cd.lendedTo" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" [disabled]="cd.lended || f.invalid">
+      <ion-icon name="cloud-upload"></ion-icon>
+      Preter
+    </ion-button>
+    <ion-button (click)="retourner()" [disabled]="!cd.lended">
+      <ion-icon name="cloud-download"></ion-icon>
+      Retourner
+    </ion-button>
+  </form>
 
 </ion-content>

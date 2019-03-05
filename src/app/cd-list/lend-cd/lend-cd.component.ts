@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController, NavParams} from '@ionic/angular';
 import {Cd} from '../../models/cd.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-lend-cd',
@@ -15,16 +16,20 @@ export class LendCdComponent implements OnInit {
 
   ngOnInit() {}
 
-  async closeModal() {
+  async onSubmitForm(form: NgForm) {
     await this.modalController.dismiss({
-      'result': ''
+      'lendedTo': form.value.lendedTo
     });
   }
 
-  async responseModal(action: boolean) {
+  async retourner() {
     await this.modalController.dismiss({
-      'result': action
+      'lendedTo': ''
     });
+  }
+
+  async closeModal() {
+    await this.modalController.dismiss();
   }
 
 }
